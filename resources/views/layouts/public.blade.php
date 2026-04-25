@@ -12,37 +12,54 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 </head>
 <body>
-    <nav id="mainNav" class="header-fixed">
-        <a href="{{ route('home') }}" class="logo" style="display: flex; align-items: center; gap: 10px;">
-            <i class="fas fa-om" style="font-size: 2rem;"></i>
-            <span>SANATAN RAKSHA SANGH</span>
-        </a>
-        <div class="nav-links">
-            <a href="{{ route('home') }}">Home</a>
-            <a href="{{ route('about') }}">About Us</a>
-            <a href="{{ route('events') }}">Events</a>
-            <a href="{{ route('gallery') }}">Gallery</a>
-            <a href="{{ route('join-us') }}">Join Us</a>
-            <a href="{{ route('donation') }}" class="donation-btn-top"><i class="fas fa-heart"></i> Donate Now</a>
-            @auth
-                @if(auth()->user()->role == 'admin')
-                    <a href="{{ route('admin.dashboard') }}" style="color: var(--accent);"><i class="fas fa-user-shield"></i> Admin</a>
-                @else
-                    <a href="{{ route('member.dashboard') }}" style="color: var(--accent);"><i class="fas fa-user"></i> Dashboard</a>
-                @endif
-            @else
-                <a href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
-            @endauth
+    <header class="header-fixed" id="mainHeader">
+        <div class="top-bar">
+            <div>
+                <i class="fas fa-envelope"></i> info@sanatanraksha.org | 
+                <i class="fas fa-phone-alt"></i> +91 800 123 4567
+            </div>
+            <div>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
         </div>
-    </nav>
+        <nav>
+            <a href="{{ route('home') }}" class="logo" style="display: flex; align-items: center; gap: 15px;">
+                <i class="fas fa-om" style="font-size: 2.5rem; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));"></i>
+                <div style="line-height: 1.2;">
+                    <span style="font-size: 1.4rem; letter-spacing: 2px;">SANATAN RAKSHA</span><br>
+                    <span style="font-size: 1rem; color: var(--accent); letter-spacing: 4px;">SANGH</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
+                <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About</a>
+                <a href="{{ route('events') }}" class="{{ request()->routeIs('events') ? 'active' : '' }}">Events</a>
+                <a href="{{ route('gallery') }}" class="{{ request()->routeIs('gallery') ? 'active' : '' }}">Gallery</a>
+                <a href="{{ route('join-us') }}" class="{{ request()->routeIs('join-us') ? 'active' : '' }}">Join Us</a>
+                @auth
+                    @if(auth()->user()->role == 'admin')
+                        <a href="{{ route('admin.dashboard') }}" style="color: var(--accent);"><i class="fas fa-user-shield"></i> Admin</a>
+                    @else
+                        <a href="{{ route('member.dashboard') }}" style="color: var(--accent);"><i class="fas fa-user"></i> Dashboard</a>
+                    @endif
+                @else
+                    <a href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+                @endauth
+                <a href="{{ route('donation') }}" class="donation-btn-top"><i class="fas fa-heart"></i> DONATE NOW</a>
+            </div>
+        </nav>
+    </header>
 
     <script>
         window.onscroll = function() {
-            var nav = document.getElementById('mainNav');
+            var header = document.getElementById('mainHeader');
             if (window.pageYOffset > 50) {
-                nav.classList.add('header-scrolled');
+                header.classList.add('header-scrolled');
             } else {
-                nav.classList.remove('header-scrolled');
+                header.classList.remove('header-scrolled');
             }
         };
     </script>
