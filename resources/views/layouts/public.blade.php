@@ -26,11 +26,11 @@
             </div>
         </div>
         <nav>
-            <a href="{{ route('home') }}" class="logo" style="display: flex; align-items: center; gap: 15px;">
-                <i class="fas fa-om" style="font-size: 2.5rem; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));"></i>
+            <a href="{{ route('home') }}" class="logo" style="display: flex; align-items: center; gap: 15px; text-decoration: none;">
+                <i class="fas fa-om" style="font-size: 2.5rem; color: var(--primary); filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.1));"></i>
                 <div style="line-height: 1.2;">
-                    <span style="font-size: 1.4rem; letter-spacing: 2px;">SANATAN RAKSHA</span><br>
-                    <span style="font-size: 1rem; color: var(--accent); letter-spacing: 4px;">SANGH</span>
+                    <span style="font-size: 1.4rem; letter-spacing: 2px; color: var(--text-dark); font-weight: 800; font-family: 'Outfit', sans-serif;">SANATAN RAKSHA</span><br>
+                    <span style="font-size: 1rem; color: var(--primary); letter-spacing: 4px; font-weight: 700;">SANGH</span>
                 </div>
             </a>
             <div class="nav-links">

@@ -49,11 +49,22 @@
                     </div>
                     <div class="form-group">
                         <label>State</label>
-                        <select name="state" id="state" class="form-control" required onchange="updateDistricts()">
+                        <select name="state" id="state" class="form-control" required>
                             <option value="">Select State</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
                             <option value="Bihar">Bihar</option>
-                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Haryana">Haryana</option>
                             <option value="Jharkhand">Jharkhand</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Uttar Pradesh" selected>Uttar Pradesh</option>
+                            <option value="West Bengal">West Bengal</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -66,7 +77,7 @@
 
                 <div class="form-group">
                     <label>Full Address</label>
-                    <textarea name="address" class="form-control" rows="3" required>{{ old('address') }}</textarea>
+                    <textarea name="address" class="form-control" rows="3" required placeholder="Building No, Street, Landmark...">{{ old('address') }}</textarea>
                 </div>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
@@ -81,7 +92,7 @@
                 </div>
 
                 <div style="text-align: center; margin-top: 2rem;">
-                    <button type="submit" class="btn-premium" style="width: 100%;">Submit Registration</button>
+                    <button type="submit" class="btn-premium" style="width: 100%;">Create Member Account</button>
                 </div>
             </form>
         </div>
@@ -90,14 +101,30 @@
 
 <script>
     const districtData = {
-        'Bihar': ['Patna', 'Gaya', 'Bhagalpur', 'Muzaffarpur'],
-        'Uttar Pradesh': ['Lucknow', 'Kanpur', 'Varanasi', 'Agra'],
-        'Jharkhand': ['Ranchi', 'Jamshedpur', 'Dhanbad', 'Bokaro']
+        'Andhra Pradesh': ['Visakhapatnam', 'Vijayawada', 'Guntur', 'Nellore'],
+        'Bihar': ['Patna', 'Gaya', 'Bhagalpur', 'Muzaffarpur', 'Darbhanga'],
+        'Delhi': ['New Delhi', 'North Delhi', 'South Delhi', 'East Delhi'],
+        'Gujarat': ['Ahmedabad', 'Surat', 'Vadodara', 'Rajkot'],
+        'Haryana': ['Gurugram', 'Faridabad', 'Panipat', 'Ambala'],
+        'Jharkhand': ['Ranchi', 'Jamshedpur', 'Dhanbad', 'Bokaro', 'Deoghar'],
+        'Karnataka': ['Bengaluru', 'Mysuru', 'Hubballi', 'Mangaluru'],
+        'Madhya Pradesh': ['Indore', 'Bhopal', 'Jabalpur', 'Gwalior'],
+        'Maharashtra': ['Mumbai', 'Pune', 'Nagpur', 'Thane', 'Nashik'],
+        'Punjab': ['Ludhiana', 'Amritsar', 'Jalandhar', 'Patiala'],
+        'Rajasthan': ['Jaipur', 'Jodhpur', 'Kota', 'Bikaner'],
+        'Tamil Nadu': ['Chennai', 'Coimbatore', 'Madurai', 'Salem'],
+        'Uttar Pradesh': ['Lucknow', 'Kanpur', 'Varanasi', 'Agra', 'Prayagraj', 'Meerut', 'Gorakhpur', 'Ayodhya'],
+        'West Bengal': ['Kolkata', 'Howrah', 'Durgapur', 'Siliguri']
     };
 
     function updateDistricts() {
-        const state = document.getElementById('state').value;
+        const stateSelect = document.getElementById('state');
         const districtSelect = document.getElementById('district');
+        const state = stateSelect.value;
+        const currentSelection = "{{ old('district') }}";
+        
+        console.log('Updating districts for:', state); // Debug log
+        
         districtSelect.innerHTML = '<option value="">Select District</option>';
         
         if (state && districtData[state]) {
@@ -105,9 +132,24 @@
                 const option = document.createElement('option');
                 option.value = district;
                 option.textContent = district;
+                if (district === currentSelection) {
+                    option.selected = true;
+                }
                 districtSelect.appendChild(option);
             });
+            districtSelect.disabled = false;
+        } else {
+            districtSelect.disabled = true;
         }
     }
+
+    // Add event listener directly
+    document.addEventListener('DOMContentLoaded', function() {
+        const stateEl = document.getElementById('state');
+        if (stateEl) {
+            stateEl.addEventListener('change', updateDistricts);
+            updateDistricts(); // Initial run
+        }
+    });
 </script>
 @endsection
