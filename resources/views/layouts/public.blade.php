@@ -12,55 +12,78 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 </head>
 <body>
-    <nav>
-        <a href="{{ route('home') }}" class="logo">SANATAN RAKSHA SANGH</a>
+    <nav id="mainNav" class="header-fixed">
+        <a href="{{ route('home') }}" class="logo" style="display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-om" style="font-size: 2rem;"></i>
+            <span>SANATAN RAKSHA SANGH</span>
+        </a>
         <div class="nav-links">
             <a href="{{ route('home') }}">Home</a>
             <a href="{{ route('about') }}">About Us</a>
             <a href="{{ route('events') }}">Events</a>
             <a href="{{ route('gallery') }}">Gallery</a>
             <a href="{{ route('join-us') }}">Join Us</a>
-            <a href="{{ route('donation') }}">Donation</a>
+            <a href="{{ route('donation') }}" class="donation-btn-top"><i class="fas fa-heart"></i> Donate Now</a>
             @auth
                 @if(auth()->user()->role == 'admin')
-                    <a href="{{ route('admin.dashboard') }}" class="btn-premium">Admin Panel</a>
+                    <a href="{{ route('admin.dashboard') }}" style="color: var(--accent);"><i class="fas fa-user-shield"></i> Admin</a>
                 @else
-                    <a href="{{ route('member.dashboard') }}" class="btn-premium">Member Panel</a>
+                    <a href="{{ route('member.dashboard') }}" style="color: var(--accent);"><i class="fas fa-user"></i> Dashboard</a>
                 @endif
             @else
-                <a href="{{ route('login') }}">Login</a>
+                <a href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
             @endauth
         </div>
     </nav>
+
+    <script>
+        window.onscroll = function() {
+            var nav = document.getElementById('mainNav');
+            if (window.pageYOffset > 50) {
+                nav.classList.add('header-scrolled');
+            } else {
+                nav.classList.remove('header-scrolled');
+            }
+        };
+    </script>
 
     <main>
         @yield('content')
     </main>
 
-    <footer style="background: var(--bg-dark); color: white; padding: 4rem 5% 2rem; margin-top: 4rem;">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem;">
+    <footer style="background: var(--bg-dark); color: white; padding: 5rem 5% 2rem; border-top: 5px solid var(--primary);">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4rem;">
             <div>
-                <h3 style="color: var(--accent); margin-bottom: 1rem;">Sanatan Raksha Sangh</h3>
-                <p>Empowering lives, protecting heritage, and building a better future together.</p>
+                <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.8rem;">Sanatan Raksha Sangh</h3>
+                <p style="opacity: 0.8; line-height: 1.8;">Our organization is dedicated to the preservation of Sanatan values and the welfare of society through service and empowerment.</p>
+                <div style="margin-top: 2rem; display: flex; gap: 1.5rem;">
+                    <a href="#" style="color: var(--primary); font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color: var(--primary); font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                    <a href="#" style="color: var(--primary); font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                    <a href="#" style="color: var(--primary); font-size: 1.5rem;"><i class="fab fa-youtube"></i></a>
+                </div>
             </div>
             <div>
-                <h3 style="margin-bottom: 1rem;">Quick Links</h3>
+                <h3 style="margin-bottom: 1.5rem; border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px;">Quick Links</h3>
                 <ul style="list-style: none;">
-                    <li><a href="{{ route('about') }}" style="color: white; text-decoration: none;">Mission & Vision</a></li>
-                    <li><a href="{{ route('events') }}" style="color: white; text-decoration: none;">Latest Events</a></li>
-                    <li><a href="{{ route('donation') }}" style="color: white; text-decoration: none;">Donate Now</a></li>
+                    <li style="margin-bottom: 0.8rem;"><a href="{{ route('about') }}" style="color: white; text-decoration: none; opacity: 0.8; transition: 0.3s;">Mission & Vision</a></li>
+                    <li style="margin-bottom: 0.8rem;"><a href="{{ route('events') }}" style="color: white; text-decoration: none; opacity: 0.8; transition: 0.3s;">Upcoming Events</a></li>
+                    <li style="margin-bottom: 0.8rem;"><a href="{{ route('gallery') }}" style="color: white; text-decoration: none; opacity: 0.8; transition: 0.3s;">Media Gallery</a></li>
+                    <li style="margin-bottom: 0.8rem;"><a href="{{ route('donation') }}" style="color: white; text-decoration: none; opacity: 0.8; transition: 0.3s;">Support Our Cause</a></li>
                 </ul>
             </div>
             <div>
-                <h3 style="margin-bottom: 1rem;">Contact Us</h3>
-                <p><i class="fas fa-map-marker-alt"></i> 123 Sangh Road, New Delhi</p>
-                <p><i class="fas fa-phone"></i> +91 98765 43210</p>
-                <p><i class="fas fa-envelope"></i> info@sanatanraksha.org</p>
+                <h3 style="margin-bottom: 1.5rem; border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px;">Contact Info</h3>
+                <p style="margin-bottom: 1rem;"><i class="fas fa-map-marker-alt" style="color: var(--primary); margin-right: 10px;"></i> 45, Sangh Sadan, Ayodhya, UP</p>
+                <p style="margin-bottom: 1rem;"><i class="fas fa-phone-alt" style="color: var(--primary); margin-right: 10px;"></i> +91 800 123 4567</p>
+                <p style="margin-bottom: 1rem;"><i class="fas fa-envelope" style="color: var(--primary); margin-right: 10px;"></i> contact@sanatanraksha.org</p>
             </div>
         </div>
-        <div style="text-align: center; margin-top: 3rem; border-top: 1px solid #334155; padding-top: 1.5rem;">
-            <p>&copy; {{ date('Year') }} Sanatan Raksha Sangh. All rights reserved.</p>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.7;">Visitor Counter: <span id="visitor-count">10,245</span></p>
+        <div style="text-align: center; margin-top: 4rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
+            <p>&copy; {{ date('Y') }} Sanatan Raksha Sangh. Developed with <i class="fas fa-heart" style="color: var(--secondary);"></i> for Dharma.</p>
+            <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.6;">
+                Visitor Count: <span style="color: var(--accent); font-weight: 700;">12,542</span>
+            </div>
         </div>
     </footer>
 </body>

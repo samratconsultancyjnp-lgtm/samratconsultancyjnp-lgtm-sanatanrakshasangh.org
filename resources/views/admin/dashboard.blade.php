@@ -1,56 +1,88 @@
 @extends('layouts.admin')
 
-@section('content')
-    <h1 style="margin-bottom: 2rem;">Dashboard Overview</h1>
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
-        <div class="admin-card" style="border-left: 5px solid var(--primary);">
-            <span style="color: #64748b; font-size: 0.9rem;">Total Members</span>
-            <h2 style="font-size: 2rem; margin-top: 0.5rem;">{{ $stats['total_members'] }}</h2>
-        </div>
-        <div class="admin-card" style="border-left: 5px solid #f59e0b;">
-            <span style="color: #64748b; font-size: 0.9rem;">Pending Approvals</span>
-            <h2 style="font-size: 2rem; margin-top: 0.5rem; color: #f59e0b;">{{ $stats['pending_approvals'] }}</h2>
-        </div>
-        <div class="admin-card" style="border-left: 5px solid #10b981;">
-            <span style="color: #64748b; font-size: 0.9rem;">Total Donations</span>
-            <h2 style="font-size: 2rem; margin-top: 0.5rem; color: #10b981;">₹{{ number_format($stats['total_donations'], 2) }}</h2>
-        </div>
-        <div class="admin-card" style="border-left: 5px solid var(--secondary);">
-            <span style="color: #64748b; font-size: 0.9rem;">Events</span>
-            <h2 style="font-size: 2rem; margin-top: 0.5rem;">{{ $stats['total_events'] }}</h2>
-        </div>
-    </div>
+@section('title', 'Dashboard Overview')
 
-    <div class="admin-card">
-        <h3 style="margin-bottom: 1.5rem;">Recent Registrations</h3>
-        <table style="width: 100%; border-collapse: collapse;">
-            <thead>
-                <tr style="text-align: left; border-bottom: 2px solid #f1f5f9;">
-                    <th style="padding: 1rem;">Name</th>
-                    <th style="padding: 1rem;">Email</th>
-                    <th style="padding: 1rem;">Status</th>
-                    <th style="padding: 1rem;">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse(\App\Models\Member::with('user')->latest()->take(5)->get() as $member)
-                    <tr style="border-bottom: 1px solid #f1f5f9;">
-                        <td style="padding: 1rem;">{{ $member->user->name }}</td>
-                        <td style="padding: 1rem;">{{ $member->user->email }}</td>
-                        <td style="padding: 1rem;">
-                            <span style="padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.8rem; background: {{ $member->status == 'approved' ? '#dcfce7' : ($member->status == 'pending' ? '#fef3c7' : '#fee2e2') }}; color: {{ $member->status == 'approved' ? '#166534' : ($member->status == 'pending' ? '#92400e' : '#991b1b') }};">
-                                {{ ucfirst($member->status) }}
-                            </span>
-                        </td>
-                        <td style="padding: 1rem;">
-                            <a href="{{ route('admin.members.index') }}" style="color: var(--primary); text-decoration: none; font-weight: 600;">Manage</a>
-                        </td>
-                    </tr>
-                @empty
-                    <tr><td colspan="4" style="padding: 1rem; text-align: center;">No recent registrations.</td></tr>
-                @endforelse
-            </tbody>
-        </table>
+@section('content')
+<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-bottom: 3rem;">
+    <div class="card stat-card">
+        <div class="stat-icon" style="background: #ebf8ff; color: #3182ce;"><i class="fas fa-users"></i></div>
+        <div>
+            <p style="color: var(--text-muted); margin: 0; font-size: 0.9rem;">Total Members</p>
+            <h3 style="margin: 0; font-size: 1.8rem;">{{ $stats['total_members'] }}</h3>
+        </div>
     </div>
+    <div class="card stat-card">
+        <div class="stat-icon" style="background: #fffaf0; color: #dd6b20;"><i class="fas fa-user-clock"></i></div>
+        <div>
+            <p style="color: var(--text-muted); margin: 0; font-size: 0.9rem;">Pending Approvals</p>
+            <h3 style="margin: 0; font-size: 1.8rem;">{{ $stats['pending_approvals'] }}</h3>
+        </div>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-icon" style="background: #f0fff4; color: #38a169;"><i class="fas fa-hand-holding-heart"></i></div>
+        <div>
+            <p style="color: var(--text-muted); margin: 0; font-size: 0.9rem;">Total Donations</p>
+            <h3 style="margin: 0; font-size: 1.8rem;">₹{{ number_format($stats['total_donations'], 2) }}</h3>
+        </div>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-icon" style="background: #fdf2f2; color: #e53e3e;"><i class="fas fa-calendar-alt"></i></div>
+        <div>
+            <p style="color: var(--text-muted); margin: 0; font-size: 0.9rem;">Total Events</p>
+            <h3 style="margin: 0; font-size: 1.8rem;">{{ $stats['total_events'] }}</h3>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h3 style="margin: 0;">Recent Member Registrations</h3>
+        <a href="{{ route('admin.members.index') }}" style="color: var(--admin-primary); text-decoration: none; font-weight: 600;">View All</a>
+    </div>
+    <table class="table-custom">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Father Name</th>
+                <th>State / District</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @php $recentMembers = \App\Models\Member::with('user', 'designation')->latest()->take(5)->get(); @endphp
+            @forelse($recentMembers as $member)
+                <tr>
+                    <td>
+                        <div style="font-weight: 700;">{{ $member->user->name }}</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">{{ $member->user->email }}</div>
+                    </td>
+                    <td>{{ $member->father_name }}</td>
+                    <td>{{ $member->state }} / {{ $member->district }}</td>
+                    <td>
+                        <span class="badge badge-{{ $member->status }}">{{ ucfirst($member->status) }}</span>
+                    </td>
+                    <td>
+                        @if($member->status == 'pending')
+                            <form action="{{ route('admin.members.approve', $member->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                <button class="btn-admin btn-approve" title="Approve"><i class="fas fa-check"></i></button>
+                            </form>
+                            <form action="{{ route('admin.members.reject', $member->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                <button class="btn-admin btn-reject" title="Reject"><i class="fas fa-times"></i></button>
+                            </form>
+                        @else
+                            <span style="color: var(--text-muted); font-size: 0.8rem;">Processed</span>
+                        @endif
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="5" style="text-align: center; padding: 3rem; color: var(--text-muted);">No recent registrations found.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
 @endsection

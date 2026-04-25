@@ -8,16 +8,17 @@
     <link rel="stylesheet" href="{{ asset('css/premium.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
     <style>
-        body { background: #f1f5f9; min-height: 100vh; }
-        .member-header { background: var(--primary); color: white; padding: 3rem 10%; }
-        .content-wrap { padding: 3rem 10%; display: grid; grid-template-columns: 1fr 300px; gap: 3rem; }
-        .member-card { background: white; border-radius: 1rem; padding: 2rem; box-shadow: var(--shadow); }
+        body { background: #FFF8F0; min-height: 100vh; }
+        .member-header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 5rem 10%; box-shadow: 0 10px 30px rgba(255,102,0,0.2); }
+        .content-wrap { padding: 4rem 10%; display: grid; grid-template-columns: 1fr 350px; gap: 4rem; }
+        .member-card { background: white; border-radius: 1.5rem; padding: 2.5rem; box-shadow: 0 15px 40px rgba(0,0,0,0.05); border: 1px solid rgba(255,102,0,0.1); }
     </style>
 </head>
 <body>
-    <nav>
-        <a href="{{ route('home') }}" class="logo">SANATAN RAKSHA SANGH</a>
-        <div class="nav-links">
+    <nav id="mainNav" class="header-fixed" style="background: var(--bg-dark);">
+        <a href="{{ route('home') }}" class="logo">
+            <i class="fas fa-om"></i> SANATAN RAKSHA SANGH
+        </a>
             <a href="{{ route('home') }}">Home</a>
             <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                 @csrf

@@ -6,17 +6,18 @@
         .id-card {
             width: 350px;
             height: 500px;
-            border: 2px solid #1a365d;
-            border-radius: 15px;
+            border: 4px solid #FF9933;
+            border-radius: 20px;
             position: relative;
             background: white;
             overflow: hidden;
             margin: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         .header {
-            background: #1a365d;
+            background: #FF9933;
             color: white;
-            padding: 20px;
+            padding: 25px 20px;
             text-align: center;
         }
         .header img { width: 100%; height: auto; }

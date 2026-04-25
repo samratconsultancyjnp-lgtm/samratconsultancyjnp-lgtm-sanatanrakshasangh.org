@@ -1,11 +1,11 @@
 @extends('layouts.public')
 
 @section('content')
-<section style="padding: 5rem 10%; background: var(--bg-light);">
-    <div style="max-width: 800px; margin: 0 auto;">
-        <div class="card-glass" style="background: white; border-color: #e2e8f0;">
-            <h2 style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; text-align: center;">Join Sanatan Raksha Sangh</h2>
-            <p style="text-align: center; color: #64748b; margin-bottom: 3rem;">Become a part of our mission. Fill out the form below to register as a member.</p>
+<section style="padding: 10rem 10% 5rem; background: var(--bg-light);">
+    <div style="max-width: 900px; margin: 0 auto;">
+        <div class="card-glass" style="background: white; border: 2px solid var(--primary); padding: 4rem; box-shadow: 0 30px 60px rgba(255,102,0,0.1);">
+            <h2 style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem; text-align: center; text-transform: uppercase;">Aatmanirbhar <span style="color: var(--secondary);">Sangathan</span></h2>
+            <p style="text-align: center; color: #64748b; margin-bottom: 4rem; font-size: 1.2rem;">Join the Sanatan Raksha Sangh and be a part of the spiritual and social revolution.</p>
 
             @if(session('success'))
                 <div style="background: #dcfce7; color: #166534; padding: 1rem; border-radius: 0.5rem; margin-bottom: 2rem;">

@@ -1,14 +1,16 @@
 @extends('layouts.public')
 
 @section('content')
-<section style="padding: 5rem 10%; background: white;">
-    <h1 style="font-size: 3rem; color: var(--primary); margin-bottom: 2rem; text-align: center;">About Us</h1>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 4rem; align-items: center;">
-        <div>
-            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="About NGO" style="width: 100%; border-radius: 1.5rem; box-shadow: var(--shadow);">
+<section style="padding: 8rem 10% 5rem; background: white;">
+    <h1 style="font-size: 3.5rem; color: var(--primary); margin-bottom: 2rem; text-align: center; text-transform: uppercase; letter-spacing: 2px;">Our Sacred Mission</h1>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 5rem; align-items: center;">
+        <div style="position: relative;">
+            <img src="https://images.unsplash.com/photo-1544006659-f0b21f04cb1d?auto=format&fit=crop&w=800&q=80" alt="About NGO" style="width: 100%; border-radius: 2rem; box-shadow: 20px 20px 0 var(--primary);">
         </div>
         <div>
-            <h2 style="color: var(--secondary); margin-bottom: 1rem;">Our Mission</h2>
+            <h2 style="color: var(--secondary); margin-bottom: 1.5rem; font-size: 2rem; display: flex; align-items: center; gap: 15px;">
+                <i class="fas fa-bullseye" style="color: var(--primary);"></i> Mission
+            </h2>
             <p style="margin-bottom: 2rem; color: #475569;">{{ $aboutText }}</p>
             
             <h2 style="color: var(--secondary); margin-bottom: 1rem;">Our Vision</h2>

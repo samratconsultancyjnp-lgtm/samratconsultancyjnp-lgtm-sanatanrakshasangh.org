@@ -2,15 +2,20 @@
 
 @section('content')
     <!-- Hero Slider -->
-    <section class="hero">
-        @if($sliders->count() > 0)
-            <h1>{{ $sliders->first()->title }}</h1>
-            <p>{{ $sliders->first()->description }}</p>
-        @else
-            <h1>Empowering Humanity</h1>
-            <p>Join us in our mission to protect and serve. Together, we can make a significant impact on lives and preserve our rich heritage.</p>
-        @endif
-        <a href="{{ route('join-us') }}" class="btn-premium">Join Our Mission</a>
+    <section class="hero" style="background: linear-gradient(rgba(45, 27, 0, 0.7), rgba(45, 27, 0, 0.7)), url('https://images.unsplash.com/photo-1544006659-f0b21f04cb1d?auto=format&fit=crop&w=1950&q=80');">
+        <div style="max-width: 900px; animation: fadeInUp 1.2s ease;">
+            @if($sliders->count() > 0)
+                <h1 style="text-shadow: 3px 3px 10px rgba(0,0,0,0.5); font-size: 4.5rem; line-height: 1.1; margin-bottom: 2rem;">{{ $sliders->first()->title }}</h1>
+                <p style="font-size: 1.5rem; margin-bottom: 3rem; opacity: 0.9; font-weight: 500;">{{ $sliders->first()->description }}</p>
+            @else
+                <h1 style="text-shadow: 3px 3px 10px rgba(0,0,0,0.5); font-size: 4.5rem; line-height: 1.1; margin-bottom: 2rem;">Raksha Dharma, <br><span style="color: var(--accent);">Serve Humanity</span></h1>
+                <p style="font-size: 1.5rem; margin-bottom: 3rem; opacity: 0.9; font-weight: 500;">Dedicated to the preservation of our heritage and the upliftment of the society through unity and selfless service.</p>
+            @endif
+            <div style="display: flex; gap: 1.5rem; justify-content: center;">
+                <a href="{{ route('join-us') }}" class="btn-premium" style="font-size: 1.2rem; padding: 1rem 3rem;">Become a Member</a>
+                <a href="{{ route('donation') }}" class="btn-premium" style="background: white; color: var(--primary); font-size: 1.2rem; padding: 1rem 3rem;">Support Us</a>
+            </div>
+        </div>
     </section>
 
     <!-- Stats Section -->
