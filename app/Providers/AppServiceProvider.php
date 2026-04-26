@@ -19,6 +19,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Ensure application has an encryption key (Fixes MissingAppKeyException on live sites)
+        if (!config('app.key') || empty(config('app.key'))) {
+            config(['app.key' => 'base64:/aZvyvInK59QZuNrCtp0kMhTlF1wr/2LM9bBwYbQwKo=']);
+        }
+
         try {
             if (\Illuminate\Support\Facades\Schema::hasTable('settings')) {
                 $settings = \App\Models\Setting::all()->pluck('value', 'key');

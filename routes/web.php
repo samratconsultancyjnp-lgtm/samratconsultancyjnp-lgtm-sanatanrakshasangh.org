@@ -18,6 +18,16 @@ Route::get('/donation', [PublicController::class, 'donation'])->name('donation')
 Route::post('/donation', [PublicController::class, 'storeDonation'])->name('donation.store');
 Route::post('/donation/submit-payment', [PublicController::class, 'submitPayment'])->name('donation.submit-payment');
 
+// Emergency Cache Clear (For Deployment Troubleshooting)
+Route::get('/clear-cache', function() {
+    Artisan::call('config:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('view:clear');
+    Artisan::call('route:clear');
+    return "Cache cleared successfully!";
+});
+
+
 // Dashboard Redirect
 Route::get('/dashboard', function () {
     if (auth()->user()->role === 'admin') {
