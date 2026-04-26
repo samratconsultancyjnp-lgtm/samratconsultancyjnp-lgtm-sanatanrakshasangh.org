@@ -26,6 +26,26 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('admin.donations.index') }}" class="{{ request()->routeIs('admin.donations.*') ? 'active' : '' }}">
+                    <i class="fas fa-hand-holding-heart"></i> Donations
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.events.index') }}" class="{{ request()->routeIs('admin.events.*') ? 'active' : '' }}">
+                    <i class="fas fa-calendar-alt"></i> Events
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.sliders.index') }}" class="{{ request()->routeIs('admin.sliders.*') ? 'active' : '' }}">
+                    <i class="fas fa-sliders-h"></i> Home Slider
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.gallery.index') }}" class="{{ request()->routeIs('admin.gallery.*') ? 'active' : '' }}">
+                    <i class="fas fa-images"></i> Gallery
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('admin.settings') }}" class="{{ request()->routeIs('admin.settings') ? 'active' : '' }}">
                     <i class="fas fa-cog"></i> Website Settings
                 </a>
@@ -33,6 +53,16 @@
             <li>
                 <a href="{{ route('admin.templates') }}" class="{{ request()->routeIs('admin.templates') ? 'active' : '' }}">
                     <i class="fas fa-file-contract"></i> Document Templates
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.designations.index') }}" class="{{ request()->routeIs('admin.designations.*') ? 'active' : '' }}">
+                    <i class="fas fa-id-badge"></i> Designations
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.team.index') }}" class="{{ request()->routeIs('admin.team.*') ? 'active' : '' }}">
+                    <i class="fas fa-users-cog"></i> Manage Team
                 </a>
             </li>
             <li>
@@ -70,6 +100,11 @@
         @endif
 
         @yield('content')
+
+        <footer style="margin-top: 5rem; padding: 2rem 0; border-top: 1px solid #edf2f7; text-align: center; font-size: 0.9rem; color: #718096;">
+            <p>&copy; {{ date('Y') }} Sanatan Raksha Sangh. All rights reserved.</p>
+            <p style="margin-top: 0.5rem;">Design and developed by <a href="https://samratconsultancy.in/" target="_blank" style="color: #ff9933; font-weight: 700; text-decoration: none;">Samrat Consultancy & IT World Pvt. Ltd.</a></p>
+        </footer>
     </div>
 </body>
 </html>

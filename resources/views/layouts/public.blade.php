@@ -26,12 +26,9 @@
             </div>
         </div>
         <nav>
-            <a href="{{ route('home') }}" class="logo" style="display: flex; align-items: center; gap: 15px; text-decoration: none;">
-                <i class="fas fa-om" style="font-size: 2.5rem; color: var(--primary); filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.1));"></i>
-                <div style="line-height: 1.2;">
-                    <span style="font-size: 1.4rem; letter-spacing: 2px; color: var(--text-dark); font-weight: 800; font-family: 'Outfit', sans-serif;">SANATAN RAKSHA</span><br>
-                    <span style="font-size: 1rem; color: var(--primary); letter-spacing: 4px; font-weight: 700;">SANGH</span>
-                </div>
+            <a href="{{ route('home') }}" class="logo" style="display: flex; align-items: center; gap: 10px; text-decoration: none; white-space: nowrap;">
+                <i class="fas fa-om" style="font-size: 1.6rem; color: var(--primary);"></i>
+                <span style="font-size: 1.1rem; letter-spacing: 1px; color: var(--text-dark); font-weight: 800; font-family: 'Outfit', sans-serif;">SANATAN RAKSHA SANGH</span>
             </a>
             <div class="nav-links">
                 <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
@@ -97,7 +94,8 @@
             </div>
         </div>
         <div style="text-align: center; margin-top: 4rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
-            <p>&copy; {{ date('Y') }} Sanatan Raksha Sangh. Developed with <i class="fas fa-heart" style="color: var(--secondary);"></i> for Dharma.</p>
+            <p>&copy; {{ date('Y') }} Sanatan Raksha Sangh. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.9;">Design and developed by <a href="https://samratconsultancy.in/" target="_blank" style="color: var(--primary); font-weight: 700; text-decoration: none;">Samrat Consultancy & IT World Pvt. Ltd.</a></p>
             <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.6;">
                 Visitor Count: <span style="color: var(--accent); font-weight: 700;">12,542</span>
             </div>

@@ -8,12 +8,26 @@
             <p style="text-align: center; color: #64748b; margin-bottom: 4rem; font-size: 1.2rem;">Join the Sanatan Raksha Sangh and be a part of the spiritual and social revolution.</p>
 
             @if(session('success'))
-                <div style="background: #dcfce7; color: #166534; padding: 1rem; border-radius: 0.5rem; margin-bottom: 2rem;">
+                <div style="background: #dcfce7; color: #166534; padding: 1.5rem; border-radius: 1rem; margin-bottom: 2rem; border: 1px solid #bbf7d0; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-check-circle" style="font-size: 1.5rem;"></i>
                     {{ session('success') }}
                 </div>
             @endif
 
-            <form action="{{ route('join-us.store') }}" method="POST">
+            @if($errors->any())
+                <div style="background: #fee2e2; color: #991b1b; padding: 1.5rem; border-radius: 1rem; margin-bottom: 2rem; border: 1px solid #fecaca;">
+                    <h4 style="margin: 0 0 10px 0; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-exclamation-triangle"></i> Please fix the following errors:
+                    </h4>
+                    <ul style="margin: 0; padding-left: 20px;">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('join-us.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
                     <div class="form-group">
@@ -37,13 +51,14 @@
                     <div class="form-group">
                         <label>Mobile Number</label>
                         <input type="text" name="mobile" class="form-control" value="{{ old('mobile') }}" required>
+                        @error('mobile') <span style="color: red; font-size: 0.8rem;">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
                         <label>Designation</label>
                         <select name="designation_id" class="form-control" required>
                             <option value="">Select Designation</option>
                             @foreach($designations as $designation)
-                                <option value="{{ $designation->id }}">{{ $designation->name }}</option>
+                                <option value="{{ $designation->id }}" {{ old('designation_id') == $designation->id ? 'selected' : '' }}>{{ $designation->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -51,20 +66,20 @@
                         <label>State</label>
                         <select name="state" id="state" class="form-control" required>
                             <option value="">Select State</option>
-                            <option value="Andhra Pradesh">Andhra Pradesh</option>
-                            <option value="Bihar">Bihar</option>
-                            <option value="Delhi">Delhi</option>
-                            <option value="Gujarat">Gujarat</option>
-                            <option value="Haryana">Haryana</option>
-                            <option value="Jharkhand">Jharkhand</option>
-                            <option value="Karnataka">Karnataka</option>
-                            <option value="Madhya Pradesh">Madhya Pradesh</option>
-                            <option value="Maharashtra">Maharashtra</option>
-                            <option value="Punjab">Punjab</option>
-                            <option value="Rajasthan">Rajasthan</option>
-                            <option value="Tamil Nadu">Tamil Nadu</option>
-                            <option value="Uttar Pradesh" selected>Uttar Pradesh</option>
-                            <option value="West Bengal">West Bengal</option>
+                            <option value="Andhra Pradesh" {{ old('state') == 'Andhra Pradesh' ? 'selected' : '' }}>Andhra Pradesh</option>
+                            <option value="Bihar" {{ old('state') == 'Bihar' ? 'selected' : '' }}>Bihar</option>
+                            <option value="Delhi" {{ old('state') == 'Delhi' ? 'selected' : '' }}>Delhi</option>
+                            <option value="Gujarat" {{ old('state') == 'Gujarat' ? 'selected' : '' }}>Gujarat</option>
+                            <option value="Haryana" {{ old('state') == 'Haryana' ? 'selected' : '' }}>Haryana</option>
+                            <option value="Jharkhand" {{ old('state') == 'Jharkhand' ? 'selected' : '' }}>Jharkhand</option>
+                            <option value="Karnataka" {{ old('state') == 'Karnataka' ? 'selected' : '' }}>Karnataka</option>
+                            <option value="Madhya Pradesh" {{ old('state') == 'Madhya Pradesh' ? 'selected' : '' }}>Madhya Pradesh</option>
+                            <option value="Maharashtra" {{ old('state') == 'Maharashtra' ? 'selected' : '' }}>Maharashtra</option>
+                            <option value="Punjab" {{ old('state') == 'Punjab' ? 'selected' : '' }}>Punjab</option>
+                            <option value="Rajasthan" {{ old('state') == 'Rajasthan' ? 'selected' : '' }}>Rajasthan</option>
+                            <option value="Tamil Nadu" {{ old('state') == 'Tamil Nadu' ? 'selected' : '' }}>Tamil Nadu</option>
+                            <option value="Uttar Pradesh" {{ old('state', 'Uttar Pradesh') == 'Uttar Pradesh' ? 'selected' : '' }}>Uttar Pradesh</option>
+                            <option value="West Bengal" {{ old('state') == 'West Bengal' ? 'selected' : '' }}>West Bengal</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -73,21 +88,28 @@
                             <option value="">Select District</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label>Profile Photo</label>
+                        <input type="file" name="photo" class="form-control" accept="image/*" style="padding: 0.6rem;">
+                        <small style="color: #64748b;">Max 2MB (JPG, PNG)</small>
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label>Full Address</label>
-                    <textarea name="address" class="form-control" rows="3" required placeholder="Building No, Street, Landmark...">{{ old('address') }}</textarea>
+                    <textarea name="address" class="form-control" rows="2" required placeholder="Building No, Street, Landmark...">{{ old('address') }}</textarea>
                 </div>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
                     <div class="form-group">
                         <label>Password</label>
                         <input type="password" name="password" class="form-control" required>
+                        @error('password') <span style="color: red; font-size: 0.8rem;">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
                         <label>Confirm Password</label>
                         <input type="password" name="password_confirmation" class="form-control" required>
+                        @error('password_confirmation') <span style="color: red; font-size: 0.8rem;">{{ $message }}</span> @enderror
                     </div>
                 </div>
 

@@ -22,8 +22,16 @@
                     <input type="text" name="contact_phone" value="{{ $settings['contact_phone'] ?? '+91 800 123 4567' }}" style="width: 100%; padding: 0.8rem; border-radius: 0.8rem; border: 1px solid #edf2f7;">
                 </div>
                 <div style="margin-bottom: 1.5rem;">
-                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">About Us Content</label>
-                    <textarea name="about_content" rows="5" style="width: 100%; padding: 0.8rem; border-radius: 0.8rem; border: 1px solid #edf2f7;">{{ $settings['about_content'] ?? '' }}</textarea>
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Mission Statement</label>
+                    <textarea name="mission_content" rows="3" style="width: 100%; padding: 0.8rem; border-radius: 0.8rem; border: 1px solid #edf2f7;">{{ $settings['mission_content'] ?? '' }}</textarea>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Vision Statement</label>
+                    <textarea name="vision_content" rows="3" style="width: 100%; padding: 0.8rem; border-radius: 0.8rem; border: 1px solid #edf2f7;">{{ $settings['vision_content'] ?? '' }}</textarea>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Main About Us Content</label>
+                    <textarea name="about_content" rows="6" style="width: 100%; padding: 0.8rem; border-radius: 0.8rem; border: 1px solid #edf2f7;">{{ $settings['about_content'] ?? '' }}</textarea>
                 </div>
             </div>
             <div>
@@ -43,6 +51,57 @@
                 <div style="margin-bottom: 1.5rem;">
                     <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">SEO Meta Description</label>
                     <textarea name="meta_description" rows="3" style="width: 100%; padding: 0.8rem; border-radius: 0.8rem; border: 1px solid #edf2f7;">{{ $settings['meta_description'] ?? '' }}</textarea>
+                </div>
+
+                <h4 style="color: var(--admin-primary); margin-top: 3rem; margin-bottom: 2rem; border-bottom: 2px solid var(--admin-bg); padding-bottom: 10px;">Payment Information (QR & Bank)</h4>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">UPI ID (for QR Code)</label>
+                    <input type="text" name="upi_id" value="{{ $settings['upi_id'] ?? '' }}" placeholder="name@upi" style="width: 100%; padding: 0.8rem; border-radius: 0.8rem; border: 1px solid #edf2f7;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Bank Name</label>
+                    <input type="text" name="bank_name" value="{{ $settings['bank_name'] ?? '' }}" style="width: 100%; padding: 0.8rem; border-radius: 0.8rem; border: 1px solid #edf2f7;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Account Number</label>
+                    <input type="text" name="account_number" value="{{ $settings['account_number'] ?? '' }}" style="width: 100%; padding: 0.8rem; border-radius: 0.8rem; border: 1px solid #edf2f7;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">IFSC Code</label>
+                    <input type="text" name="ifsc_code" value="{{ $settings['ifsc_code'] ?? '' }}" style="width: 100%; padding: 0.8rem; border-radius: 0.8rem; border: 1px solid #edf2f7;">
+                </div>
+
+                <h4 style="color: var(--admin-primary); margin-top: 3rem; margin-bottom: 2rem; border-bottom: 2px solid var(--admin-bg); padding-bottom: 10px;">SMTP Mail Settings</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Mail Host</label>
+                        <input type="text" name="mail_host" value="{{ $settings['mail_host'] ?? '' }}" placeholder="smtp.gmail.com" style="width: 100%; padding: 0.8rem; border-radius: 0.8rem; border: 1px solid #edf2f7;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Mail Port</label>
+                        <input type="text" name="mail_port" value="{{ $settings['mail_port'] ?? '587' }}" style="width: 100%; padding: 0.8rem; border-radius: 0.8rem; border: 1px solid #edf2f7;">
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Mail Username</label>
+                    <input type="text" name="mail_username" value="{{ $settings['mail_username'] ?? '' }}" style="width: 100%; padding: 0.8rem; border-radius: 0.8rem; border: 1px solid #edf2f7;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Mail Password</label>
+                    <input type="password" name="mail_password" value="{{ $settings['mail_password'] ?? '' }}" style="width: 100%; padding: 0.8rem; border-radius: 0.8rem; border: 1px solid #edf2f7;">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Encryption</label>
+                        <select name="mail_encryption" style="width: 100%; padding: 0.8rem; border-radius: 0.8rem; border: 1px solid #edf2f7;">
+                            <option value="tls" {{ ($settings['mail_encryption'] ?? '') == 'tls' ? 'selected' : '' }}>TLS</option>
+                            <option value="ssl" {{ ($settings['mail_encryption'] ?? '') == 'ssl' ? 'selected' : '' }}>SSL</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">From Email</label>
+                        <input type="text" name="mail_from_address" value="{{ $settings['mail_from_address'] ?? '' }}" style="width: 100%; padding: 0.8rem; border-radius: 0.8rem; border: 1px solid #edf2f7;">
+                    </div>
                 </div>
             </div>
         </div>

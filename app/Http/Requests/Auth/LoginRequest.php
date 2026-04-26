@@ -53,6 +53,21 @@ class LoginRequest extends FormRequest
         RateLimiter::clear($this->throttleKey());
     }
 
+    public function validateCredentials(): void
+    {
+        $this->ensureIsNotRateLimited();
+
+        if (! Auth::validate($this->only('email', 'password'))) {
+            RateLimiter::hit($this->throttleKey());
+
+            throw ValidationException::withMessages([
+                'email' => trans('auth.failed'),
+            ]);
+        }
+
+        RateLimiter::clear($this->throttleKey());
+    }
+
     /**
      * Ensure the login request is not rate limited.
      *

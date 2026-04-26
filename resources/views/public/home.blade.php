@@ -2,11 +2,12 @@
 
 @section('content')
     <!-- Hero Slider -->
-    <section class="hero" style="background: linear-gradient(rgba(45, 27, 0, 0.7), rgba(45, 27, 0, 0.7)), url('https://images.unsplash.com/photo-1544006659-f0b21f04cb1d?auto=format&fit=crop&w=1950&q=80');">
+    @php $firstSlider = $sliders->first(); @endphp
+    <section class="hero" style="background: linear-gradient(rgba(45, 27, 0, 0.7), rgba(45, 27, 0, 0.7)), url('{{ $firstSlider ? asset('storage/' . $firstSlider->image) : 'https://images.unsplash.com/photo-1544006659-f0b21f04cb1d?auto=format&fit=crop&w=1950&q=80' }}'); background-size: cover; background-position: center;">
         <div style="max-width: 900px; animation: fadeInUp 1.2s ease;">
-            @if($sliders->count() > 0)
-                <h1 style="text-shadow: 3px 3px 10px rgba(0,0,0,0.5); font-size: 4.5rem; line-height: 1.1; margin-bottom: 2rem;">{{ $sliders->first()->title }}</h1>
-                <p style="font-size: 1.5rem; margin-bottom: 3rem; opacity: 0.9; font-weight: 500;">{{ $sliders->first()->description }}</p>
+            @if($firstSlider)
+                <h1 style="text-shadow: 3px 3px 10px rgba(0,0,0,0.5); font-size: 4.5rem; line-height: 1.1; margin-bottom: 2rem;">{{ $firstSlider->title }}</h1>
+                <p style="font-size: 1.5rem; margin-bottom: 3rem; opacity: 0.9; font-weight: 500;">{{ $firstSlider->description }}</p>
             @else
                 <h1 style="text-shadow: 3px 3px 10px rgba(0,0,0,0.5); font-size: 4.5rem; line-height: 1.1; margin-bottom: 2rem;">Raksha Dharma, <br><span style="color: var(--accent);">Serve Humanity</span></h1>
                 <p style="font-size: 1.5rem; margin-bottom: 3rem; opacity: 0.9; font-weight: 500;">Dedicated to the preservation of our heritage and the upliftment of the society through unity and selfless service.</p>

@@ -12,7 +12,8 @@
             <input type="hidden" name="type" value="id_card">
             
             <div style="margin-bottom: 2rem;">
-                <label style="display: block; margin-bottom: 0.8rem; font-weight: 600;">Header Logo/Image</label>
+                <label style="display: block; margin-bottom: 0.2rem; font-weight: 600;">Header Logo/Image</label>
+                <small style="color: #94a3b8; display: block; margin-bottom: 0.8rem;">Recommended: 1000x200 px (Wide)</small>
                 @if($idCard && $idCard->header)
                     <img src="{{ asset('storage/'.$idCard->header) }}" style="width: 100%; height: 80px; object-fit: contain; margin-bottom: 1rem; border: 1px solid #eee;">
                 @endif
@@ -20,7 +21,8 @@
             </div>
 
             <div style="margin-bottom: 2rem;">
-                <label style="display: block; margin-bottom: 0.8rem; font-weight: 600;">Watermark Image</label>
+                <label style="display: block; margin-bottom: 0.2rem; font-weight: 600;">Watermark Image</label>
+                <small style="color: #94a3b8; display: block; margin-bottom: 0.8rem;">Recommended: 500x500 px (Square)</small>
                 @if($idCard && $idCard->watermark)
                     <img src="{{ asset('storage/'.$idCard->watermark) }}" style="width: 100px; height: 100px; object-fit: contain; margin-bottom: 1rem; border: 1px solid #eee;">
                 @endif
@@ -28,7 +30,8 @@
             </div>
 
             <div style="margin-bottom: 2rem;">
-                <label style="display: block; margin-bottom: 0.8rem; font-weight: 600;">Footer Image</label>
+                <label style="display: block; margin-bottom: 0.2rem; font-weight: 600;">Footer Image</label>
+                <small style="color: #94a3b8; display: block; margin-bottom: 0.8rem;">Recommended: 1000x150 px (Wide)</small>
                 @if($idCard && $idCard->footer)
                     <img src="{{ asset('storage/'.$idCard->footer) }}" style="width: 100%; height: 50px; object-fit: contain; margin-bottom: 1rem; border: 1px solid #eee;">
                 @endif
@@ -47,7 +50,8 @@
             <input type="hidden" name="type" value="joining_letter">
             
             <div style="margin-bottom: 2rem;">
-                <label style="display: block; margin-bottom: 0.8rem; font-weight: 600;">Letterhead Header</label>
+                <label style="display: block; margin-bottom: 0.2rem; font-weight: 600;">Letterhead Header</label>
+                <small style="color: #94a3b8; display: block; margin-bottom: 0.8rem;">Recommended: 2000x400 px (Wide)</small>
                 @if($joiningLetter && $joiningLetter->header)
                     <img src="{{ asset('storage/'.$joiningLetter->header) }}" style="width: 100%; height: 100px; object-fit: contain; margin-bottom: 1rem; border: 1px solid #eee;">
                 @endif
@@ -55,7 +59,8 @@
             </div>
 
             <div style="margin-bottom: 2rem;">
-                <label style="display: block; margin-bottom: 0.8rem; font-weight: 600;">Official Stamp (Watermark)</label>
+                <label style="display: block; margin-bottom: 0.2rem; font-weight: 600;">Official Stamp (Watermark)</label>
+                <small style="color: #94a3b8; display: block; margin-bottom: 0.8rem;">Recommended: 600x600 px (Square)</small>
                 @if($joiningLetter && $joiningLetter->watermark)
                     <img src="{{ asset('storage/'.$joiningLetter->watermark) }}" style="width: 150px; height: 150px; object-fit: contain; margin-bottom: 1rem; border: 1px solid #eee;">
                 @endif
@@ -63,7 +68,8 @@
             </div>
 
             <div style="margin-bottom: 2rem;">
-                <label style="display: block; margin-bottom: 0.8rem; font-weight: 600;">Letter Footer</label>
+                <label style="display: block; margin-bottom: 0.2rem; font-weight: 600;">Letter Footer</label>
+                <small style="color: #94a3b8; display: block; margin-bottom: 0.8rem;">Recommended: 2000x300 px (Wide)</small>
                 @if($joiningLetter && $joiningLetter->footer)
                     <img src="{{ asset('storage/'.$joiningLetter->footer) }}" style="width: 100%; height: 80px; object-fit: contain; margin-bottom: 1rem; border: 1px solid #eee;">
                 @endif

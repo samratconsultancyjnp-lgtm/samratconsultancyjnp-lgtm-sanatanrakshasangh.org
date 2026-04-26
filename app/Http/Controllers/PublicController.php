@@ -11,6 +11,7 @@ use App\Models\Donation;
 use App\Models\GalleryAlbum;
 use App\Models\Designation;
 use App\Models\Setting;
+use Illuminate\Support\Str;
 
 class PublicController extends Controller
 {
@@ -28,7 +29,8 @@ class PublicController extends Controller
     public function about()
     {
         $aboutText = Setting::where('key', 'about_content')->first()->value ?? 'About our NGO...';
-        return view('public.about', compact('aboutText'));
+        $team = \App\Models\Team::orderBy('sort_order')->get();
+        return view('public.about', compact('aboutText', 'team'));
     }
 
     public function events()
@@ -72,6 +74,7 @@ class PublicController extends Controller
             'state' => 'required|string',
             'district' => 'required|string',
             'designation_id' => 'required|exists:designations,id',
+            'photo' => 'nullable|image|max:2048',
         ]);
 
         $user = \App\Models\User::create([
@@ -80,6 +83,11 @@ class PublicController extends Controller
             'password' => \Illuminate\Support\Facades\Hash::make($request->password),
             'role' => 'member',
         ]);
+
+        $photoPath = null;
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('members/photos', 'public');
+        }
 
         Member::create([
             'user_id' => $user->id,
@@ -90,6 +98,7 @@ class PublicController extends Controller
             'state' => $request->state,
             'district' => $request->district,
             'designation_id' => $request->designation_id,
+            'photo' => $photoPath,
             'status' => 'pending',
         ]);
 
@@ -100,12 +109,55 @@ class PublicController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'mobile' => 'required|string|max:15',
             'email' => 'required|email',
             'amount' => 'required|numeric|min:1',
+            'pan_number' => 'nullable|string|max:10',
+            'message' => 'nullable|string',
         ]);
 
-        Donation::create($request->all());
+        $data = $request->only(['name', 'mobile', 'email', 'amount', 'pan_number', 'message']);
+        $data['transaction_id'] = 'TXN' . strtoupper(Str::random(10));
+        $data['status'] = 'pending';
+        $data['user_id'] = auth()->id();
 
-        return back()->with('success', 'Donation submitted. Our team will contact you soon.');
+        $donation = Donation::create($data);
+
+        return back()->with('donation_success', [
+            'id' => $donation->id,
+            'name' => $donation->name,
+            'amount' => $donation->amount,
+            'transaction_id' => $donation->transaction_id,
+            'upi_id' => Setting::where('key', 'upi_id')->first()->value ?? 'ngo@upi',
+            'bank_name' => Setting::where('key', 'bank_name')->first()->value ?? 'N/A',
+            'account_number' => Setting::where('key', 'account_number')->first()->value ?? 'N/A',
+            'ifsc_code' => Setting::where('key', 'ifsc_code')->first()->value ?? 'N/A',
+        ]);
+    }
+
+    public function submitPayment(Request $request)
+    {
+        $request->validate([
+            'donation_id' => 'required|exists:donations,id',
+            'transaction_id' => 'required|string|max:255',
+        ]);
+
+        $donation = Donation::findOrFail($request->donation_id);
+
+        // Security Check: Only allow updating pending donations that haven't been submitted yet (TXN prefix)
+        // or allow updating if it belongs to the logged-in user and is pending.
+        $isOwner = auth()->check() && $donation->user_id == auth()->id();
+        $isPendingRecord = $donation->status === 'pending' && str_starts_with($donation->transaction_id, 'TXN');
+
+        if (!$isOwner && !$isPendingRecord) {
+            abort(403, 'This donation record cannot be updated.');
+        }
+
+        $donation->update([
+            'transaction_id' => $request->transaction_id,
+            'status' => 'pending'
+        ]);
+
+        return redirect()->route('donation')->with('final_success', 'Thank you! Your payment record has been submitted and is pending for approval. You will receive the receipt on your email once approved.');
     }
 }

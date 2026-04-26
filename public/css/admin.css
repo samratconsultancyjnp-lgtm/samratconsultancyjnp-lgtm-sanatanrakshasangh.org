@@ -138,3 +138,37 @@ body {
 
 .btn-approve { background: #38a169; color: white; }
 .btn-reject { background: #e53e3e; color: white; }
+
+.btn-primary {
+    background: var(--admin-primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.8rem;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: var(--admin-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 102, 0, 0.2);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 0.8rem;
+    border: 1px solid #edf2f7;
+    background: #f8fafc;
+    font-family: inherit;
+    transition: 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--admin-primary);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(255, 153, 51, 0.1);
+}

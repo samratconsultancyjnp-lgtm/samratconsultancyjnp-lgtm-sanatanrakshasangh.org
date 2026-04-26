@@ -19,6 +19,7 @@ class Member extends Model
         'state',
         'district',
         'designation_id',
+        'photo',
         'status',
     ];
 

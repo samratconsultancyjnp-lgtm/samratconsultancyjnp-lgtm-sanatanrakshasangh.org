@@ -20,12 +20,14 @@ return new class extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('father_name');
-            $table->date('dob');
+            $table->string('father_name')->nullable();
+            $table->date('dob')->nullable();
             $table->string('mobile');
-            $table->text('address');
+            $table->text('address')->nullable();
             $table->string('state');
             $table->string('district');
+            $table->string('pincode')->nullable();
+            $table->string('photo')->nullable();
             $table->foreignId('designation_id')->constrained();
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamps();
@@ -66,8 +68,10 @@ return new class extends Migration
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email');
+            $table->string('mobile');
+            $table->string('email')->nullable();
             $table->decimal('amount', 10, 2);
+            $table->string('transaction_id')->unique();
             $table->string('payment_method')->nullable();
             $table->enum('status', ['pending', 'approved'])->default('pending');
             $table->timestamps();
