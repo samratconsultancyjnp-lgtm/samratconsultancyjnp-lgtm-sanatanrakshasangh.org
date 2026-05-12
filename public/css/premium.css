@@ -1,14 +1,14 @@
 :root {
-    --primary: #FF9933; /* Bhagva / Saffron */
-    --secondary: #FF6600; /* Deep Saffron */
+    --primary: #FF7000; /* Vibrant Saffron from old site */
+    --secondary: #E66500; /* Deep Saffron */
     --accent: #FFD700; /* Golden */
-    --bg-dark: #3E1F00; /* Deep Earthy Brown */
-    --bg-light: #FFF8F0; /* Light Creamy Saffron */
-    --text-dark: #2D1B00;
+    --bg-dark: #1a1a1a; /* Neutral Dark */
+    --bg-light: #FFFFFF; /* White */
+    --text-dark: #333333;
     --text-light: #f1f5f9;
-    --glass: rgba(255, 153, 51, 0.1);
-    --glass-border: rgba(255, 153, 51, 0.2);
-    --shadow: 0 10px 30px rgba(255, 102, 0, 0.15);
+    --glass: rgba(255, 112, 0, 0.05);
+    --glass-border: rgba(255, 112, 0, 0.1);
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 /* Sticky Header Styles */
@@ -22,14 +22,19 @@
 }
 
 .top-bar {
-    background: var(--primary); /* Saffron Top Bar */
-    color: white;
-    padding: 0.6rem 10%;
+    background: #f8f8f8; /* Light gray from old site */
+    color: var(--text-dark);
+    padding: 0.5rem 10%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.85rem;
-    font-weight: 600;
+    font-size: 0.8rem;
+    border-bottom: 1px solid #eee;
+}
+
+.top-bar i {
+    color: var(--primary);
+    margin-right: 5px;
 }
 
 .top-bar a {

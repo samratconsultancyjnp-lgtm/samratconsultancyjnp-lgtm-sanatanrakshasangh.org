@@ -15,13 +15,14 @@
     <header class="header-fixed" id="mainHeader">
         <div class="top-bar">
             <div>
-                <i class="fas fa-envelope"></i> info@sanatanraksha.org | 
-                <i class="fas fa-phone-alt"></i> +91 800 123 4567
+                <i class="fas fa-map-marker-alt"></i> प्रयागराज, उत्तर प्रदेश | 
+                <i class="fas fa-phone-alt"></i> +91-79051 15880
             </div>
             <div>
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
                 <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
                 <a href="#"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
@@ -88,9 +89,9 @@
             </div>
             <div>
                 <h3 style="margin-bottom: 1.5rem; border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px;">Contact Info</h3>
-                <p style="margin-bottom: 1rem;"><i class="fas fa-map-marker-alt" style="color: var(--primary); margin-right: 10px;"></i> 45, Sangh Sadan, Ayodhya, UP</p>
-                <p style="margin-bottom: 1rem;"><i class="fas fa-phone-alt" style="color: var(--primary); margin-right: 10px;"></i> +91 800 123 4567</p>
-                <p style="margin-bottom: 1rem;"><i class="fas fa-envelope" style="color: var(--primary); margin-right: 10px;"></i> contact@sanatanraksha.org</p>
+                <p style="margin-bottom: 1rem;"><i class="fas fa-map-marker-alt" style="color: var(--primary); margin-right: 10px;"></i> श्री दक्षिण मुखी संकट मोचन छोटे हनुमान मंदिर दारागंज संगम मार्ग रोड प्रयागराज</p>
+                <p style="margin-bottom: 1rem;"><i class="fas fa-phone-alt" style="color: var(--primary); margin-right: 10px;"></i> +91-79051 15880, +91-99354 82748</p>
+                <p style="margin-bottom: 1rem;"><i class="fas fa-envelope" style="color: var(--primary); margin-right: 10px;"></i> sanatanrakshasangh@rediffmail.com</p>
             </div>
         </div>
         <div style="text-align: center; margin-top: 4rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
